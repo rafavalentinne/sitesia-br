@@ -9,6 +9,19 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;800&family=Outfit:wght@700;900&display=swap" rel="stylesheet">
     
+    <script>
+        !function(f,b,e,v,n,t,s)
+        {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+        n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+        if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+        n.queue=[];t=b.createElement(e);t.async=!0;
+        t.src=v;s=b.getElementsByTagName(e)[0];
+        s.parentNode.insertBefore(t,s)}(window, document,'script',
+        'https://connect.facebook.net/en_US/fbevents.js');
+        fbq('init', '605285899070341');
+        fbq('track', 'PageView');
+    </script>
+    <noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=605285899070341&ev=PageView&noscript=1"/></noscript>
     <style>
         /* --- CSS: HIGH CONVERSION DARK MODE --- */
         :root {
@@ -460,7 +473,7 @@
                 <a href="https://pay.kirvano.com/3d6a548b-d4c5-49f3-b6de-5e6021447d4e" onclick="trackInitiateCheckout('Botao Oferta');" class="btn-cta">
                     GARANTIR A MINHA VAGA AGORA 👉
                 </a>
-                <div class="micro-copy" style="margin-top: 15px;">Métodos Seguros: PIX • Cartão</div>
+                <div class="micro-copy" style="margin-top: 15px;">Métodos Seguros: PIX • Boleto • Cartão</div>
             </div>
 
             <div class="guarantee-box">
@@ -524,24 +537,21 @@
             iframe.style.top = '0'; iframe.style.left = '0';
             iframe.style.width = '100%'; iframe.style.height = '100%';
             document.getElementById('videoWrapper').appendChild(iframe);
-            localStorage.setItem('cookiesAccepted', 'true');
-            loadTrackingScripts();
+            
+            // Removi loadTrackingScripts() daqui pois o Meta Pixel agora carrega no head.
+            if (!localStorage.getItem('cookiesAccepted')) {
+                loadClarity();
+                localStorage.setItem('cookiesAccepted', 'true');
+            }
         }
 
-        function loadTrackingScripts() { 
+        // Função separada apenas para o Clarity (para manter o site leve)
+        function loadClarity() { 
             (function(c,l,a,r,i,t,y){
                 c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
                 t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/vkcwdeck54";
                 y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
             })(window, document, "clarity", "script", "vkcwdeck54");
-
-            !function(f,b,e,v,n,t,s){
-                if(f.fbq)return; n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-                if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];
-                t=b.createElement(e);t.async=!0;t.src=v; s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s);
-            }(window, document,'script','https://connect.facebook.net/en_US/fbevents.js');
-            fbq('init', '605285899070341');
-            fbq('track', 'PageView');
         }
 
         function trackInitiateCheckout(origin) {
@@ -553,9 +563,9 @@
         }
 
         if (localStorage.getItem('cookiesAccepted') === 'true') {
-            loadTrackingScripts();
+            loadClarity();
         } else {
-            setTimeout(loadTrackingScripts, 5000); 
+            setTimeout(loadClarity, 5000); 
         }
     </script>
 </body>
