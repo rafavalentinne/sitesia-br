@@ -121,7 +121,7 @@
 
         .link-no {
             display: block; margin-top: 25px; color: #64748b; font-size: 0.95rem; font-weight: 500;
-            text-decoration: underline; cursor: pointer;
+            text-decoration: underline; cursor: pointer; border: none; background: transparent; width: 100%;
         }
         .link-no:hover { color: white; }
 
@@ -251,13 +251,13 @@
             
             <p style="color: var(--accent); font-weight: bold; margin-bottom: 30px;">(Adicionado com 1 clique. Sem precisar digitar o cartão novamente)</p>
 
-            <a href="LINK_DE_UPSELL_DA_KIRVANO_AQUI" class="btn-yes">
+            <button class="btn-yes kirvano-payment-trigger">
                 SIM! QUERO ADICIONAR O PACK AO MEU PEDIDO
-            </a>
+            </button>
 
-            <a href="https://br.rbsf.site/obrigado.html" class="link-no">
+            <button class="link-no kirvano-refuse-trigger">
                 Não, obrigado. Prefiro gastar horas tentando criar o design do zero.
-            </a>
+            </button>
         </div>
     </section>
 
@@ -276,7 +276,6 @@
     </div>
 
     <script>
-        // --- LÓGICA DO MODAL DE PREVIEW ---
         const modal = document.getElementById('modalOverlay');
         const iframe = document.getElementById('modalFrame');
         const modalTitle = document.getElementById('modalProjectName');
@@ -299,5 +298,13 @@
         document.getElementById('modalClose').onclick = closeModal;
         modal.addEventListener('click', (e) => { if(e.target === modal) closeModal(); });
     </script>
+
+    <script>
+        var offer = "44c54625-746b-476a-8d50-8ef955152f38";
+        var nextPageURL = "https://br.rbsf.site/lp-up/"; // Link se o cliente disser SIM
+        var refusePageURL = "https://br.rbsf.site/obrigado.html"; // Link se o cliente disser NÃO (Adicionado o link que estava no seu html antigo)
+    </script>
+    <script src="https://snippets.kirvano.com/upsell.min.js"></script>
+
 </body>
 </html>
